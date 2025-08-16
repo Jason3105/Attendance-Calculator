@@ -419,13 +419,13 @@ function AttendanceChart({ subjects, attendanceData, setAttendanceData }) {
             <>
               <span className="instruction-line"><strong>Tap</strong> to add attendance</span>
               <span className="instruction-line"><strong>Long press</strong> to remove attendance</span>
-              <span className="instruction-line">Swipe horizontally to see more dates</span>
+              <span className="instruction-line">Swipe horizontally to navigate</span>
             </>
           ) : (
             <>
-              <span className="instruction-line"><strong>Left-click</strong> to add attendance, <strong>right-click</strong> to remove attendance</span>
+              <span className="instruction-line"><strong>Left-click</strong> to add, <strong>right-click</strong> to remove</span>
               <span className="instruction-line">Hover over squares to see details</span>
-              <span className="mobile-hint">Swipe horizontally to see more dates</span>
+              <span className="mobile-hint">Swipe horizontally to navigate</span>
             </>
           )}
         </div>

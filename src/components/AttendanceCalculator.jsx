@@ -96,29 +96,38 @@ function AttendanceCalculator() {
   }
 
   const removeSubject = (id) => {
-    if (subjects.length > 1) {
-      const subjectToRemove = subjects.find(s => s.id === id)
-      const subjectName = subjectToRemove?.name
-      
-      // Remove the subject from the list
+    const subjectToRemove = subjects.find(s => s.id === id)
+    const subjectName = subjectToRemove?.name
+    
+    // If this is the last subject, replace it with a fresh blank subject
+    if (subjects.length === 1) {
+      const newId = Date.now()
+      setSubjects([{ 
+        id: newId, 
+        name: 'Subject 1', 
+        attended: '', 
+        total: '' 
+      }])
+    } else {
+      // Remove the subject from the list if there are multiple subjects
       setSubjects(subjects.filter(subject => subject.id !== id))
-      
-      // Clean up orphaned attendance data for this subject
-      if (subjectName) {
-        setAttendanceData(prev => {
-          const newData = { ...prev }
-          Object.keys(newData).forEach(dateKey => {
-            if (newData[dateKey] && newData[dateKey][subjectName]) {
-              delete newData[dateKey][subjectName]
-              // If no subjects left for this date, remove the date entry
-              if (Object.keys(newData[dateKey]).length === 0) {
-                delete newData[dateKey]
-              }
+    }
+    
+    // Clean up orphaned attendance data for this subject
+    if (subjectName) {
+      setAttendanceData(prev => {
+        const newData = { ...prev }
+        Object.keys(newData).forEach(dateKey => {
+          if (newData[dateKey] && newData[dateKey][subjectName]) {
+            delete newData[dateKey][subjectName]
+            // If no subjects left for this date, remove the date entry
+            if (Object.keys(newData[dateKey]).length === 0) {
+              delete newData[dateKey]
             }
-          })
-          return newData
+          }
         })
-      }
+        return newData
+      })
     }
   }
 
@@ -249,14 +258,13 @@ function AttendanceCalculator() {
                         className="subject-name-input"
                         placeholder="Subject Name"
                       />
-                      {subjects.length > 1 && (
-                        <button 
-                          onClick={() => removeSubject(subject.id)}
-                          className="btn btn-danger btn-sm"
-                        >
-                          <i className="fas fa-times"></i>
-                        </button>
-                      )}
+                      <button 
+                        onClick={() => removeSubject(subject.id)}
+                        className="btn btn-danger btn-sm"
+                        title={subjects.length === 1 ? "Clear subject data" : "Remove subject"}
+                      >
+                        <i className="fas fa-times"></i>
+                      </button>
                     </div>
 
                     <div className="subject-inputs">

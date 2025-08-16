@@ -85,6 +85,13 @@
   background: var(--color-fg-muted);
 }
 
+/* Mobile scroll indicator */
+@media (max-width: 768px) {
+  .chart-container {
+    position: relative;
+  }
+}
+
 .month-labels {
   display: flex;
   justify-content: space-around;
@@ -149,6 +156,8 @@
   transition: all 0.1s ease;
   position: relative;
   flex-shrink: 0;
+  min-width: 11px;
+  min-height: 11px;
 }
 
 .day:hover {
@@ -167,6 +176,26 @@
 .day.today {
   outline: 1px solid var(--color-accent-emphasis);
   outline-offset: 1px;
+}
+
+/* Mobile touch improvements for better accessibility */
+@media (max-width: 768px) {
+  .day {
+    min-width: 10px;
+    min-height: 10px;
+    /* Increase touch target without affecting visual size */
+    position: relative;
+  }
+  
+  .day::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    z-index: 1;
+  }
 }
 
 /* Attendance levels - GitHub style */
@@ -222,28 +251,28 @@
   margin-top: 16px;
   padding-top: 16px;
   border-top: 1px solid var(--color-border-muted);
-}
-
-.chart-instructions p {
-  font-size: 12px;
-  color: var(--color-fg-muted);
-  margin: 0;
   display: flex;
   align-items: flex-start;
   gap: 8px;
-  line-height: 1.4;
+}
+
+.instruction-header {
+  flex-shrink: 0;
+  margin-top: 2px;
 }
 
 .chart-instructions .fas {
   color: var(--color-accent-fg);
-  margin-top: 2px;
-  flex-shrink: 0;
+  font-size: 12px;
 }
 
 .instruction-text {
   display: flex;
   flex-direction: column;
   gap: 4px;
+  font-size: 12px;
+  color: var(--color-fg-muted);
+  line-height: 1.4;
 }
 
 .instruction-line {
@@ -268,16 +297,10 @@
 
 @media (max-width: 768px) {
   .day:active {
-    transform: scale(1.1);
+    transform: scale(1.2);
     transition: transform 0.1s ease;
   }
   
-  .mobile-hint {
-    display: inline;
-  }
-}
-
-@media (max-width: 768px) {
   .mobile-hint {
     display: inline;
   }
@@ -288,6 +311,7 @@
   .chart-container {
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
   }
   
   .month-labels,
@@ -303,7 +327,8 @@
 @media (max-width: 768px) {
   .attendance-chart {
     padding: 16px;
-    margin: 24px 0;
+    margin: 20px 0;
+    border-radius: 8px;
   }
   
   .chart-header {
@@ -314,22 +339,29 @@
   
   .chart-title h3 {
     font-size: 16px;
+    margin-bottom: 6px;
   }
   
   .chart-stats {
     gap: 12px;
     justify-content: flex-start;
+    flex-wrap: wrap;
   }
   
   .chart-container {
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
-    padding-bottom: 8px;
+    scroll-behavior: smooth;
+    padding-bottom: 10px;
+    border-radius: 6px;
+    background: rgba(0, 0, 0, 0.01);
+    padding: 8px;
   }
   
   .month-labels {
-    padding-left: 30px;
-    min-width: 600px;
+    padding-left: 28px;
+    min-width: 580px;
+    margin-bottom: 6px;
   }
   
   .month-label {
@@ -337,17 +369,21 @@
   }
   
   .chart-grid {
-    min-width: 600px;
-    gap: 6px;
+    min-width: 580px;
+    gap: 5px;
   }
   
   .day-labels {
-    width: 24px;
+    width: 22px;
     font-size: 9px;
   }
   
+  .day-labels span {
+    padding-right: 2px;
+  }
+  
   .weeks-container {
-    min-width: 550px;
+    min-width: 540px;
     gap: 2px;
   }
   
@@ -358,42 +394,59 @@
   .day {
     width: 10px;
     height: 10px;
+    border-radius: 1px;
   }
   
   .chart-legend {
     justify-content: center;
-    margin-top: 16px;
+    margin-top: 14px;
     flex-wrap: wrap;
+    gap: 6px;
   }
   
   .legend-squares .day {
     width: 10px;
     height: 10px;
   }
+  
+  .chart-instructions {
+    margin-top: 14px;
+    padding-top: 14px;
+  }
 }
 
 @media (max-width: 480px) {
   .attendance-chart {
     padding: 12px;
-    margin: 20px 0;
+    margin: 16px 0;
+    border-radius: 6px;
   }
   
   .chart-title h3 {
     font-size: 15px;
+    margin-bottom: 4px;
   }
   
   .chart-stats {
-    flex-direction: column;
+    flex-direction: row;
     gap: 8px;
+    flex-wrap: wrap;
+  }
+  
+  .stat {
+    font-size: 11px;
   }
   
   .chart-container {
-    padding-bottom: 12px;
+    padding: 6px;
+    border-radius: 4px;
+    background: rgba(0, 0, 0, 0.02);
   }
   
   .month-labels {
-    padding-left: 24px;
-    min-width: 500px;
+    padding-left: 20px;
+    min-width: 460px;
+    margin-bottom: 4px;
   }
   
   .month-label {
@@ -401,17 +454,21 @@
   }
   
   .chart-grid {
-    gap: 4px;
-    min-width: 500px;
+    gap: 3px;
+    min-width: 460px;
   }
   
   .day-labels {
-    width: 20px;
+    width: 18px;
     font-size: 8px;
   }
   
+  .day-labels span {
+    padding-right: 1px;
+  }
+  
   .weeks-container {
-    min-width: 460px;
+    min-width: 430px;
     gap: 1px;
   }
   
@@ -422,6 +479,7 @@
   .day {
     width: 8px;
     height: 8px;
+    border-radius: 1px;
   }
   
   .legend-squares .day {
@@ -429,40 +487,98 @@
     height: 8px;
   }
   
-  .chart-instructions p {
-    font-size: 13px;
-    line-height: 1.5;
+  .chart-instructions {
+    margin-top: 12px;
+    padding-top: 12px;
   }
   
   .instruction-text {
-    gap: 6px;
+    gap: 4px;
   }
   
   .instruction-line {
-    margin-bottom: 4px;
+    margin-bottom: 3px;
+    font-size: 11px;
   }
   
   .subject-select {
     font-size: 11px;
     padding: 4px 6px;
+    min-width: 100px;
   }
 }
 
 @media (max-width: 380px) {
-  .chart-container {
-    border-radius: 8px;
-    background: rgba(0, 0, 0, 0.02);
-    padding: 8px;
+  .attendance-chart {
+    padding: 10px;
+    margin: 12px 0;
+    border-radius: 6px;
   }
   
-  .month-labels,
-  .chart-grid,
+  .chart-title h3 {
+    font-size: 14px;
+  }
+  
+  .chart-stats {
+    gap: 6px;
+  }
+  
+  .stat {
+    font-size: 10px;
+  }
+  
+  .chart-container {
+    border-radius: 4px;
+    background: rgba(0, 0, 0, 0.02);
+    padding: 6px;
+  }
+  
+  .month-labels {
+    padding-left: 16px;
+    min-width: 380px;
+  }
+  
+  .month-label {
+    font-size: 8px;
+  }
+  
+  .chart-grid {
+    min-width: 380px;
+    gap: 2px;
+  }
+  
+  .day-labels {
+    width: 14px;
+    font-size: 7px;
+  }
+  
   .weeks-container {
-    min-width: 420px;
+    min-width: 350px;
+  }
+  
+  .day {
+    width: 7px;
+    height: 7px;
+  }
+  
+  .legend-squares .day {
+    width: 7px;
+    height: 7px;
   }
   
   .chart-instructions {
-    margin-top: 12px;
-    padding-top: 12px;
+    margin-top: 10px;
+    padding-top: 10px;
+  }
+  
+  .instruction-line {
+    font-size: 10px;
+    margin-bottom: 2px;
+  }
+  
+  .subject-select {
+    font-size: 10px;
+    padding: 3px 5px;
+    min-width: 90px;
   }
 }
