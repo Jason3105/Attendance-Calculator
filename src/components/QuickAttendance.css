@@ -1,0 +1,352 @@
+/* Quick Attendance Entry Styles */
+.quick-attendance {
+  background-color: var(--color-canvas-subtle);
+  border: 1px solid var(--color-border-default);
+  border-radius: 12px;
+  padding: 24px;
+  margin: 24px 0;
+}
+
+.quick-header h3 {
+  margin: 0 0 8px 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--color-fg-default);
+}
+
+.quick-header p {
+  margin: 0 0 20px 0;
+  font-size: 14px;
+  color: var(--color-fg-muted);
+}
+
+.attendance-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.date-selector {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.date-selector label {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-fg-default);
+  min-width: 80px;
+}
+
+.date-input {
+  background-color: var(--color-canvas-default);
+  border: 1px solid var(--color-border-default);
+  border-radius: 6px;
+  padding: 8px 12px;
+  color: var(--color-fg-default);
+  font-size: 14px;
+  min-height: 44px;
+}
+
+.date-input:focus {
+  outline: none;
+  border-color: var(--color-accent-emphasis);
+  box-shadow: 0 0 0 3px rgba(47, 129, 247, 0.1);
+}
+
+.subjects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 12px;
+}
+
+.subject-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  border: 1px solid var(--color-border-default);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background-color: var(--color-canvas-default);
+}
+
+.subject-checkbox:hover {
+  border-color: var(--color-accent-emphasis);
+  background-color: rgba(47, 129, 247, 0.05);
+}
+
+.subject-checkbox.selected {
+  border-color: var(--color-success-emphasis);
+  background-color: rgba(63, 185, 80, 0.1);
+}
+
+.checkbox {
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--color-border-default);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-canvas-subtle);
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.subject-checkbox.selected .checkbox {
+  border-color: var(--color-success-emphasis);
+  background-color: var(--color-success-emphasis);
+  color: white;
+}
+
+.checkbox .fas {
+  font-size: 12px;
+  margin: 0;
+}
+
+.subject-label {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-fg-default);
+  flex-grow: 1;
+}
+
+.class-count {
+  font-size: 12px;
+  color: var(--color-fg-muted);
+  font-style: italic;
+}
+
+.subject-checkbox.selected .class-count {
+  color: var(--color-success-fg);
+  font-weight: 500;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+
+.save-btn {
+  background-color: var(--color-btn-primary-bg);
+  border-color: var(--color-btn-primary-bg);
+  color: white;
+}
+
+.save-btn:hover:not(:disabled) {
+  background-color: var(--color-btn-primary-hover-bg);
+  border-color: var(--color-btn-primary-hover-bg);
+}
+
+.save-btn:disabled {
+  background-color: var(--color-border-muted);
+  border-color: var(--color-border-muted);
+  color: var(--color-fg-muted);
+  cursor: not-allowed;
+}
+
+.btn-secondary {
+  background-color: var(--color-canvas-default);
+  border-color: var(--color-border-default);
+  color: var(--color-fg-default);
+}
+
+.btn-secondary:hover {
+  background-color: var(--color-border-muted);
+}
+
+.no-subjects {
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--color-fg-muted);
+}
+
+.no-subjects .fas {
+  font-size: 24px;
+  margin: 0 0 12px 0;
+  color: var(--color-accent-fg);
+}
+
+.no-subjects p {
+  margin: 0;
+  font-size: 14px;
+}
+
+/* Success notification */
+.attendance-notification {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background-color: var(--color-success-emphasis);
+  color: white;
+  padding: 12px 20px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  z-index: 1000;
+  animation: slideIn 0.3s ease, slideOut 0.3s ease 2.7s;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideOut {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+
+/* Responsive design */
+@media (max-width: 1024px) {
+  .subjects-grid {
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 10px;
+  }
+}
+
+@media (max-width: 768px) {
+  .quick-attendance {
+    padding: 20px;
+  }
+  
+  .subjects-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  
+  .date-selector {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  
+  .date-selector label {
+    min-width: auto;
+  }
+  
+  .action-buttons {
+    justify-content: stretch;
+  }
+  
+  .action-buttons .btn {
+    flex: 1;
+    justify-content: center;
+  }
+  
+  .subject-checkbox {
+    padding: 10px 14px;
+  }
+}
+
+@media (max-width: 640px) {
+  .quick-attendance {
+    padding: 18px;
+  }
+  
+  .quick-header h3 {
+    font-size: 16px;
+  }
+  
+  .quick-header p {
+    font-size: 13px;
+  }
+  
+  .date-input {
+    min-height: 42px;
+    font-size: 15px;
+  }
+  
+  .subject-checkbox {
+    padding: 12px 14px;
+  }
+  
+  .subject-label {
+    font-size: 13px;
+  }
+  
+  .class-count {
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 480px) {
+  .quick-attendance {
+    padding: 16px;
+  }
+  
+  .subject-checkbox {
+    padding: 10px 12px;
+  }
+  
+  .action-buttons {
+    flex-direction: column;
+  }
+  
+  .attendance-notification {
+    left: 20px;
+    right: 20px;
+    top: 20px;
+  }
+  
+  .btn {
+    min-height: 42px;
+  }
+}
+
+@media (max-width: 375px) {
+  .quick-attendance {
+    padding: 14px;
+  }
+  
+  .quick-header h3 {
+    font-size: 15px;
+  }
+  
+  .subject-checkbox {
+    padding: 8px 10px;
+  }
+  
+  .checkbox {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+@media (max-width: 320px) {
+  .quick-attendance {
+    padding: 12px;
+  }
+  
+  .attendance-form {
+    gap: 16px;
+  }
+  
+  .subject-checkbox {
+    padding: 6px 8px;
+  }
+  
+  .btn {
+    font-size: 12px;
+    padding: 8px 12px;
+    min-height: 40px;
+  }
+}

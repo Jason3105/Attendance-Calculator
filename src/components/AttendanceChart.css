@@ -1,0 +1,468 @@
+/* GitHub-style Attendance Chart */
+.attendance-chart {
+  background-color: var(--color-canvas-subtle);
+  border: 1px solid var(--color-border-default);
+  border-radius: 12px;
+  padding: 24px;
+  margin: 32px 0;
+  overflow: hidden;
+}
+
+.chart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 20px;
+  gap: 16px;
+}
+
+.chart-title h3 {
+  margin: 0 0 8px 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--color-fg-default);
+}
+
+.chart-stats {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.stat {
+  font-size: 12px;
+  color: var(--color-fg-muted);
+}
+
+.stat strong {
+  color: var(--color-fg-default);
+}
+
+.subject-filter {
+  flex-shrink: 0;
+}
+
+.subject-select {
+  background-color: var(--color-canvas-default);
+  border: 1px solid var(--color-border-default);
+  border-radius: 6px;
+  padding: 6px 8px;
+  color: var(--color-fg-default);
+  font-size: 12px;
+  min-width: 120px;
+}
+
+.subject-select:focus {
+  outline: none;
+  border-color: var(--color-accent-emphasis);
+  box-shadow: 0 0 0 3px rgba(47, 129, 247, 0.1);
+}
+
+.chart-container {
+  position: relative;
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: visible;
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-border-default) var(--color-canvas-subtle);
+}
+
+.chart-container::-webkit-scrollbar {
+  height: 8px;
+}
+
+.chart-container::-webkit-scrollbar-track {
+  background: var(--color-canvas-subtle);
+  border-radius: 4px;
+}
+
+.chart-container::-webkit-scrollbar-thumb {
+  background: var(--color-border-default);
+  border-radius: 4px;
+}
+
+.chart-container::-webkit-scrollbar-thumb:hover {
+  background: var(--color-fg-muted);
+}
+
+.month-labels {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 8px;
+  padding-left: 40px;
+  min-width: 800px;
+}
+
+.month-label {
+  font-size: 11px;
+  color: var(--color-fg-muted);
+  text-align: center;
+  flex: 1;
+  min-width: 0;
+  white-space: nowrap;
+}
+
+.chart-grid {
+  display: flex;
+  gap: 8px;
+  min-width: 800px;
+}
+
+.day-labels {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 32px;
+  font-size: 10px;
+  color: var(--color-fg-muted);
+  padding: 2px 0;
+  flex-shrink: 0;
+}
+
+.day-labels span {
+  height: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 4px;
+}
+
+.weeks-container {
+  display: flex;
+  gap: 3px;
+  flex: 1;
+  min-width: 750px;
+}
+
+.week {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  flex: 1;
+}
+
+.day {
+  width: 11px;
+  height: 11px;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: all 0.1s ease;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.day:hover {
+  outline: 1px solid var(--color-fg-muted);
+  outline-offset: 1px;
+}
+
+.day.empty {
+  cursor: default;
+}
+
+.day.empty:hover {
+  outline: none;
+}
+
+.day.today {
+  outline: 1px solid var(--color-accent-emphasis);
+  outline-offset: 1px;
+}
+
+/* Attendance levels - GitHub style */
+.day.level-0 {
+  background-color: var(--color-canvas-default);
+  border: 1px solid var(--color-border-muted);
+}
+
+.day.level-1 {
+  background-color: #0e4429;
+  border: 1px solid #0e4429;
+}
+
+.day.level-2 {
+  background-color: #006d32;
+  border: 1px solid #006d32;
+}
+
+.day.level-3 {
+  background-color: #26a641;
+  border: 1px solid #26a641;
+}
+
+.chart-legend {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 4px;
+  margin-top: 12px;
+  padding-right: 8px;
+}
+
+.legend-label {
+  font-size: 11px;
+  color: var(--color-fg-muted);
+}
+
+.legend-squares {
+  display: flex;
+  gap: 2px;
+  margin: 0 4px;
+}
+
+.legend-squares .day {
+  cursor: default;
+}
+
+.legend-squares .day:hover {
+  outline: none;
+}
+
+.chart-instructions {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid var(--color-border-muted);
+}
+
+.chart-instructions p {
+  font-size: 12px;
+  color: var(--color-fg-muted);
+  margin: 0;
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  line-height: 1.4;
+}
+
+.chart-instructions .fas {
+  color: var(--color-accent-fg);
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+
+.instruction-text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.instruction-line {
+  display: block;
+  margin-bottom: 2px;
+}
+
+.mobile-hint {
+  display: none;
+}
+
+/* Mobile touch improvements */
+.day {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+@media (max-width: 768px) {
+  .day:active {
+    transform: scale(1.1);
+    transition: transform 0.1s ease;
+  }
+  
+  .mobile-hint {
+    display: inline;
+  }
+}
+
+@media (max-width: 768px) {
+  .mobile-hint {
+    display: inline;
+  }
+}
+
+/* Responsive design for chart */
+@media (max-width: 1200px) {
+  .chart-container {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  .month-labels,
+  .chart-grid {
+    min-width: 700px;
+  }
+  
+  .weeks-container {
+    min-width: 650px;
+  }
+}
+
+@media (max-width: 768px) {
+  .attendance-chart {
+    padding: 16px;
+    margin: 24px 0;
+  }
+  
+  .chart-header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+  
+  .chart-title h3 {
+    font-size: 16px;
+  }
+  
+  .chart-stats {
+    gap: 12px;
+    justify-content: flex-start;
+  }
+  
+  .chart-container {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 8px;
+  }
+  
+  .month-labels {
+    padding-left: 30px;
+    min-width: 600px;
+  }
+  
+  .month-label {
+    font-size: 10px;
+  }
+  
+  .chart-grid {
+    min-width: 600px;
+    gap: 6px;
+  }
+  
+  .day-labels {
+    width: 24px;
+    font-size: 9px;
+  }
+  
+  .weeks-container {
+    min-width: 550px;
+    gap: 2px;
+  }
+  
+  .week {
+    gap: 2px;
+  }
+  
+  .day {
+    width: 10px;
+    height: 10px;
+  }
+  
+  .chart-legend {
+    justify-content: center;
+    margin-top: 16px;
+    flex-wrap: wrap;
+  }
+  
+  .legend-squares .day {
+    width: 10px;
+    height: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .attendance-chart {
+    padding: 12px;
+    margin: 20px 0;
+  }
+  
+  .chart-title h3 {
+    font-size: 15px;
+  }
+  
+  .chart-stats {
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .chart-container {
+    padding-bottom: 12px;
+  }
+  
+  .month-labels {
+    padding-left: 24px;
+    min-width: 500px;
+  }
+  
+  .month-label {
+    font-size: 9px;
+  }
+  
+  .chart-grid {
+    gap: 4px;
+    min-width: 500px;
+  }
+  
+  .day-labels {
+    width: 20px;
+    font-size: 8px;
+  }
+  
+  .weeks-container {
+    min-width: 460px;
+    gap: 1px;
+  }
+  
+  .week {
+    gap: 1px;
+  }
+  
+  .day {
+    width: 8px;
+    height: 8px;
+  }
+  
+  .legend-squares .day {
+    width: 8px;
+    height: 8px;
+  }
+  
+  .chart-instructions p {
+    font-size: 13px;
+    line-height: 1.5;
+  }
+  
+  .instruction-text {
+    gap: 6px;
+  }
+  
+  .instruction-line {
+    margin-bottom: 4px;
+  }
+  
+  .subject-select {
+    font-size: 11px;
+    padding: 4px 6px;
+  }
+}
+
+@media (max-width: 380px) {
+  .chart-container {
+    border-radius: 8px;
+    background: rgba(0, 0, 0, 0.02);
+    padding: 8px;
+  }
+  
+  .month-labels,
+  .chart-grid,
+  .weeks-container {
+    min-width: 420px;
+  }
+  
+  .chart-instructions {
+    margin-top: 12px;
+    padding-top: 12px;
+  }
+}
