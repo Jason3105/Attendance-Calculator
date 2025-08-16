@@ -411,24 +411,24 @@ function AttendanceChart({ subjects, attendanceData, setAttendanceData }) {
       </div>
 
       <div className="chart-instructions">
-        <p>
+        <div className="instruction-header">
           <i className="fas fa-info-circle"></i>
-          <div className="instruction-text">
-            {isMobile ? (
-              <>
-                <span className="instruction-line"><strong>Tap</strong> to add attendance</span>
-                <span className="instruction-line"><strong>Long press</strong> to remove attendance</span>
-                <span className="instruction-line">Swipe horizontally to see more dates</span>
-              </>
-            ) : (
-              <>
-                <span className="instruction-line"><strong>Left-click</strong> to add attendance, <strong>right-click</strong> to remove attendance</span>
-                <span className="instruction-line">Hover over squares to see details</span>
-                <span className="mobile-hint">Swipe horizontally to see more dates</span>
-              </>
-            )}
-          </div>
-        </p>
+        </div>
+        <div className="instruction-text">
+          {isMobile ? (
+            <>
+              <span className="instruction-line"><strong>Tap</strong> to add attendance</span>
+              <span className="instruction-line"><strong>Long press</strong> to remove attendance</span>
+              <span className="instruction-line">Swipe horizontally to see more dates</span>
+            </>
+          ) : (
+            <>
+              <span className="instruction-line"><strong>Left-click</strong> to add attendance, <strong>right-click</strong> to remove attendance</span>
+              <span className="instruction-line">Hover over squares to see details</span>
+              <span className="mobile-hint">Swipe horizontally to see more dates</span>
+            </>
+          )}
+        </div>
       </div>
     </div>
   )
