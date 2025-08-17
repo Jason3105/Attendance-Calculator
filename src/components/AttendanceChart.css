@@ -94,25 +94,25 @@
 
 .month-labels {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   margin-bottom: 8px;
   padding-left: 40px;
-  min-width: 800px;
+  padding-right: 8px;
+  min-width: 790px;
 }
 
 .month-label {
   font-size: 11px;
   color: var(--color-fg-muted);
   text-align: center;
-  flex: 1;
-  min-width: 0;
   white-space: nowrap;
+  flex: 0 0 auto;
 }
 
 .chart-grid {
   display: flex;
   gap: 8px;
-  min-width: 800px;
+  min-width: 790px;
 }
 
 .day-labels {
@@ -149,15 +149,15 @@
 }
 
 .day {
-  width: 11px;
-  height: 11px;
+  width: 12px;
+  height: 12px;
   border-radius: 2px;
   cursor: pointer;
   transition: all 0.1s ease;
   position: relative;
   flex-shrink: 0;
-  min-width: 11px;
-  min-height: 11px;
+  min-width: 12px;
+  min-height: 12px;
 }
 
 .day:hover {
@@ -316,7 +316,7 @@
   
   .month-labels,
   .chart-grid {
-    min-width: 700px;
+    min-width: 690px; /* Match: padding + weeks-container width */
   }
   
   .weeks-container {
@@ -359,42 +359,48 @@
   }
   
   .month-labels {
-    padding-left: 28px;
-    min-width: 580px;
-    margin-bottom: 6px;
+    margin-left: 32px; /* Align with day-labels width + gap */
+    margin-bottom: 8px;
+    width: 560px; /* Match weeks-container width exactly */
+    display: flex;
+    justify-content: space-between;
+    padding: 0; /* Remove any padding that might affect alignment */
   }
   
   .month-label {
-    font-size: 10px;
+    font-size: 11px;
+    text-align: center;
+    white-space: nowrap;
+    flex: 1; /* Changed back to flex: 1 for equal distribution */
   }
   
   .chart-grid {
-    min-width: 580px;
-    gap: 5px;
+    min-width: 600px; /* Increased to accommodate larger boxes */
+    gap: 8px;
   }
   
   .day-labels {
-    width: 22px;
-    font-size: 9px;
+    width: 28px; /* Increased from 25px */
+    font-size: 10px;
   }
   
   .day-labels span {
-    padding-right: 2px;
+    padding-right: 4px;
   }
   
   .weeks-container {
-    min-width: 540px;
-    gap: 2px;
+    min-width: 560px; /* Match month-labels width */
+    gap: 4px; /* Increased gap for better spacing */
   }
   
   .week {
-    gap: 2px;
+    gap: 4px; /* Increased gap */
   }
   
   .day {
-    width: 10px;
-    height: 10px;
-    border-radius: 1px;
+    width: 14px; /* Increased from 12px */
+    height: 14px; /* Increased from 12px */
+    border-radius: 3px;
   }
   
   .chart-legend {
@@ -405,8 +411,8 @@
   }
   
   .legend-squares .day {
-    width: 10px;
-    height: 10px;
+    width: 14px; /* Match updated day size */
+    height: 14px; /* Match updated day size */
   }
   
   .chart-instructions {
@@ -444,47 +450,53 @@
   }
   
   .month-labels {
-    padding-left: 20px;
-    min-width: 460px;
-    margin-bottom: 4px;
+    margin-left: 26px; /* Align with day-labels width + gap */
+    margin-bottom: 6px;
+    width: 440px; /* Match weeks-container width exactly */
+    display: flex;
+    justify-content: space-between;
+    padding: 0; /* Remove any padding that might affect alignment */
   }
   
   .month-label {
-    font-size: 9px;
+    font-size: 10px;
+    text-align: center;
+    white-space: nowrap;
+    flex: 1; /* Changed back to flex: 1 for equal distribution */
   }
   
   .chart-grid {
-    gap: 3px;
-    min-width: 460px;
+    gap: 5px;
+    min-width: 472px; /* Increased to accommodate larger boxes */
   }
   
   .day-labels {
-    width: 18px;
-    font-size: 8px;
+    width: 22px; /* Increased from 20px */
+    font-size: 9px;
   }
   
   .day-labels span {
-    padding-right: 1px;
+    padding-right: 3px;
   }
   
   .weeks-container {
-    min-width: 430px;
-    gap: 1px;
+    min-width: 440px; /* Match month-labels width */
+    gap: 3px;
   }
   
   .week {
-    gap: 1px;
+    gap: 3px;
   }
   
   .day {
-    width: 8px;
-    height: 8px;
-    border-radius: 1px;
+    width: 12px; /* Increased from 10px */
+    height: 12px; /* Increased from 10px */
+    border-radius: 2px;
   }
   
   .legend-squares .day {
-    width: 8px;
-    height: 8px;
+    width: 12px; /* Match updated day size */
+    height: 12px; /* Match updated day size */
   }
   
   .chart-instructions {
@@ -534,36 +546,44 @@
   }
   
   .month-labels {
-    padding-left: 16px;
-    min-width: 380px;
+    margin-left: 20px; /* Align with day-labels width + gap */
+    margin-right: 4px;
+    width: 360px; /* Increased width for larger boxes */
+    display: flex;
+    justify-content: space-between; /* Changed back to space-between for proper alignment */
   }
   
   .month-label {
-    font-size: 8px;
+    font-size: 9px;
+    text-align: center;
+    white-space: nowrap;
+    flex: 1; /* Changed back to flex: 1 for equal distribution */
   }
   
   .chart-grid {
-    min-width: 380px;
-    gap: 2px;
+    min-width: 384px; /* Increased to accommodate larger boxes */
+    gap: 4px;
   }
   
   .day-labels {
-    width: 14px;
-    font-size: 7px;
+    width: 18px; /* Increased from 16px */
+    font-size: 8px;
   }
   
   .weeks-container {
-    min-width: 350px;
+    min-width: 360px; /* Match month-labels width */
+    gap: 2px;
   }
   
   .day {
-    width: 7px;
-    height: 7px;
+    width: 11px; /* Increased from 9px */
+    height: 11px; /* Increased from 9px */
+    border-radius: 2px;
   }
   
   .legend-squares .day {
-    width: 7px;
-    height: 7px;
+    width: 11px; /* Match updated day size */
+    height: 11px; /* Match updated day size */
   }
   
   .chart-instructions {
